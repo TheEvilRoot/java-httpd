@@ -1,5 +1,7 @@
 package me.theevilroot.httpd.request;
 
+import me.theevilroot.httpd.util.UriPath;
+
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
 import java.util.HashMap;
@@ -11,6 +13,7 @@ public class HttpRequestBuilder implements HttpRequest {
     private final String protocol;
 
     private final String decodedPath;
+    private final UriPath uriPath;
 
     private byte[] body = null;
     private final HashMap<String, String> headers = new HashMap<>();
@@ -20,6 +23,7 @@ public class HttpRequestBuilder implements HttpRequest {
         this.path = path;
         this.protocol = protocol;
         this.decodedPath = decodePath();
+        this.uriPath = new UriPath(path);
     }
 
     public void addHeader(String key, String value) {
@@ -81,8 +85,8 @@ public class HttpRequestBuilder implements HttpRequest {
     }
 
     @Override
-    public String getPath() {
-        return decodedPath;
+    public UriPath getPath() {
+        return uriPath;
     }
 
     @Override

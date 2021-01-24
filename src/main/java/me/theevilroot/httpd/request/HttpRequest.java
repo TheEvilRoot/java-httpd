@@ -1,5 +1,7 @@
 package me.theevilroot.httpd.request;
 
+import me.theevilroot.httpd.util.UriPath;
+
 public interface HttpRequest {
 
     boolean hasHeader(String key);
@@ -12,7 +14,7 @@ public interface HttpRequest {
 
     String getProtocol();
 
-    String getPath();
+    UriPath getPath();
 
     String getEncodedPath();
 
