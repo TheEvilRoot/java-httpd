@@ -70,6 +70,18 @@ public class EchoRequestHandler implements RequestHandler {
 
 This handler will handle all GET requests and send response with header `X-Request-Path` that contains the request path.
 
+Also, you can extend `BaseRequestHandler` and overload one or more of `do` methods that handles specific HTTP methods.
+
+**Methods you can overload:**
+* `doGet(HttpRequest)` -- handle GET requests
+* `doPost(HttpRequest)`-- handle POST requests
+* `doHead(HttpRequest)` -- handle HEAD requests
+* `doDelete(HttpRequest)` -- handle DELETE requests
+* `doPatch(HttpRequest)` -- handle PATCH requests
+* `doMethod(String, HttpRequest)` -- handle requests with any other method
+
+By default, all handle functions of `BaseRequestHandler` returns `405 Method not Allowed` status code.
+
 ### Using BodyWriters
 
 To send body within a response, you need to use `BodyWriter`.
