@@ -26,8 +26,8 @@ public class Log {
     }
 
     public void error(Throwable exc, String ... msg) {
-        System.out.printf("%s :: Error :: %s", name, joinStrings(msg));
-        System.out.printf("%s :: %s : %s", name, exc.getClass().getSimpleName(), exc.getLocalizedMessage());
+        System.out.printf("%s :: Error :: %s\n", name, joinStrings(msg));
+        System.out.printf("%s :: %s : %s\n", name, exc.getClass().getSimpleName(), exc.getLocalizedMessage());
     }
 
     public void errorf(Throwable exc, String format, Object ... args) {
