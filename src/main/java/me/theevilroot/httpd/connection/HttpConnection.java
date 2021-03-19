@@ -67,14 +67,18 @@ public class HttpConnection implements Runnable {
             String header;
             do {
                 header = StreamUtil.readUntil(stream, lineSeparator);
-                if (header.length() > 2 && header.indexOf('=') > 0) {
-                    String[] keyValue = header.split("=", 2);
+                if (header.length() > 2 && header.indexOf(':') > 0) {
+                    String[] keyValue = header.split(": ", 2);
                     builder.addHeader(keyValue[0], keyValue[1]);
                 }
-            } while (header.length() > 2);
+            } while (header.length() > 1);
             logger.log("Headers read complete");
 
             int contentLength = builder.getContentLength();
+            if (contentLength < 0) {
+                logger.logf("Content-Length is invalid number");
+                contentLength = 0;
+            }
             logger.logf("Content length = %d", contentLength);
             if (contentLength > 0 && builder.canHaveBody()) {
                 logger.log("Reading body...");
@@ -123,7 +127,7 @@ public class HttpConnection implements Runnable {
         Iterator<Map.Entry<String, String>> iterator = response.getHeadersIterator();
         while (iterator.hasNext()) {
             Map.Entry<String, String> next = iterator.next();
-            header = next.getKey() + "=" + next.getValue();
+            header = next.getKey() + ": " + next.getValue();
 
             stream.write(header.getBytes(StandardCharsets.UTF_8), 0, header.length());
             stream.write(lineSeparator);

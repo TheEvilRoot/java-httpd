@@ -4,14 +4,14 @@ plugins {
 }
 
 group = "me.theevilroot"
-version = "0.2"
+version = "0.3"
 
 publishing {
     publications {
         create<MavenPublication>("maven") {
             groupId = "me.theevilroot"
             artifactId = "httpd"
-            version = "0.2"
+            version = version
             from(components["java"])
 
             pom {
@@ -30,8 +30,7 @@ publishing {
     }
 }
 
-repositories {
-    mavenCentral()
+tasks.withType<JavaCompile> {
+    sourceCompatibility = "1.8"
+    targetCompatibility = "1.8"
 }
-
-dependencies { }

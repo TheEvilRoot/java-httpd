@@ -20,4 +20,9 @@ public class DataBodyWriter implements BodyWriter {
     public void writeTo(OutputStream stream) throws IOException {
         stream.write(data);
     }
+
+    @Override
+    public long getContentLength() {
+        return data.length;
+    }
 }

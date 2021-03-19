@@ -7,4 +7,6 @@ public interface BodyWriter {
 
     void writeTo(OutputStream stream) throws IOException;
 
+    long getContentLength();
+
 }

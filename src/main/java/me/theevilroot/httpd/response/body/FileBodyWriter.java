@@ -47,4 +47,12 @@ public class FileBodyWriter implements BodyWriter {
 
         fileInputStream.close();
     }
+
+    @Override
+    public long getContentLength() {
+        if (file == null) {
+            file = path.toFile();
+        }
+        return file.length();
+    }
 }

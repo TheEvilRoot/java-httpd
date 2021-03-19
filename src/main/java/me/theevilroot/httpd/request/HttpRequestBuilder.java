@@ -40,7 +40,9 @@ public class HttpRequestBuilder implements HttpRequest {
             try {
                 int value = Integer.parseInt(header);
                 return Math.max(value, 0);
-            } catch (NumberFormatException ignored) { }
+            } catch (NumberFormatException ignored) {
+                return -1;
+            }
         }
         return 0;
     }

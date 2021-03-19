@@ -52,8 +52,17 @@ public class HttpResponse {
         headers.put(key, value);
     }
 
+    public void removeHeader(String key) {
+        headers.remove(key);
+    }
+
     public void setBodyWriter(BodyWriter writer) {
         this.bodyWriter = writer;
+        if (bodyWriter != null) {
+            addHeader("Content-Length", String.valueOf(bodyWriter.getContentLength()));
+        } else {
+            removeHeader("Content-Length");
+        }
     }
 
     public String getProtocol() {

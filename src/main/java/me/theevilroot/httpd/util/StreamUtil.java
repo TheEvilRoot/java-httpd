@@ -39,7 +39,8 @@ public class StreamUtil {
          int pointer = 0;
 
          while (pointer < bytes.length) {
-             int read = stream.read(bytes, pointer, Math.min(batch, bytes.length - pointer - 1));
+             int currentBatch = Math.min(batch, bytes.length - pointer - 1);
+             int read = stream.read(bytes, pointer, currentBatch);
              pointer += read;
          }
 
